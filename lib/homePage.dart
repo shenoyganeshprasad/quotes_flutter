@@ -10,7 +10,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   QuotesList quotesList = QuotesList();
-
+  bool isDark = false;
   @override
   void initState() {
     super.initState();
@@ -31,6 +31,25 @@ class _HomePageState extends State<HomePage> {
         getNewQuote();
       },
       child: Scaffold(
+        backgroundColor: isDark ? Colors.black : Colors.white,
+        appBar: AppBar(
+          backgroundColor: isDark ? Colors.black : Colors.white,
+          elevation: 0.0,
+          actions: <Widget>[
+            IconButton(
+                icon: isDark
+                    ? Icon(Icons.brightness_medium)
+                    : Icon(
+                        Icons.brightness_3,
+                        color: isDark ? Colors.white : Colors.black,
+                      ),
+                onPressed: () {
+                  setState(() {
+                    isDark = !isDark;
+                  });
+                })
+          ],
+        ),
         body: Center(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.0),
@@ -43,6 +62,7 @@ class _HomePageState extends State<HomePage> {
                     textStyle: TextStyle(
                       fontSize: 25.0,
                       letterSpacing: 1.5,
+                      color: isDark ? Colors.white : Colors.black,
                     ),
                   ),
                   textAlign: TextAlign.justify,
@@ -55,6 +75,7 @@ class _HomePageState extends State<HomePage> {
                       fontSize: 20.0,
                       letterSpacing: 1.5,
                       fontStyle: FontStyle.italic,
+                      color: isDark ? Colors.white : Colors.black,
                     ),
                   ),
                   textAlign: TextAlign.end,
